@@ -26,6 +26,7 @@ int count = 0;
 
 void setup() {
   Serial.begin(9600);
+  pinMode(LED_BUILTIN, OUTPUT);
   mySwitch.enableReceive(0);  // Receiver on interrupt 0 => that is pin #2
   setupWifi();
 }
@@ -98,8 +99,18 @@ void counting()
   Serial.println(msgBuffer);
   
   mqttClient.publish(topicBuffer, msgBuffer);
+
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(500);                       // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  delay(500);                       // wait for a second
+
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(500);                       // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  delay(500);                       // wait for a second
   
-  delay(2000);
+  
   count = 0;
 }
 
